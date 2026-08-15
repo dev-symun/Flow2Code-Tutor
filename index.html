@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow2Code Tutor</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .header {
+            height: 60px;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .container {
+            height: calc(100vh - 60px);
+            width: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        Flow2Code Tutor
+    </div>
+
+    <div class="container">
+        <iframe
+            src="https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_flow2codetutor_FrP_CX/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
+            allow="microphone"
+            loading="lazy">
+        </iframe>
+    </div>
+
+</body>
+</html>
