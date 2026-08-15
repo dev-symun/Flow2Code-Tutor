@@ -1,325 +1,110 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Flow2Code Tutor</title>
+    <title>Flow2Code Tutor</title>
 
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- 왼쪽 영역 -->
+    <div class="left-panel">
+
+        <div class="panel-header">
+            <h2>📈 Flow Builder</h2>
+            <p>내 생각이 순서도로 자라나요!</p>
+        </div>
+
+        <!-- Mermaid 순서도 -->
+        <div id="diagram-container">
+            <div id="diagram"></div>
+        </div>
+
+    </div>
+
+    <!-- 오른쪽 영역 -->
+    <div class="right-panel">
+
+        <!-- 문제 영역 -->
+        <div class="problem-box">
+
+            <h2>📝 현재 문제</h2>
+
+            <p id="problemText">
+                아직 문제가 입력되지 않았습니다.
+            </p>
+
+        </div>
+
+        <!-- AI 채팅 영역 -->
+        <div class="chat-box">
+
+            <div id="chatMessage" class="chat-message">
+
+                <h3>🤖 Flow2Code Tutor</h3>
+
+                <p>
+                    안녕하세요! 😊
+                </p>
+
+                <p>
+                    저는 Flow2Code Tutor예요.
+                </p>
+
+                <p>
+                    먼저 코딩 문제를 입력해주세요.
+                </p>
+
+                <p>
+                    함께 입력, 출력, 처리 과정을 찾아보면서
+                    순서도를 완성해볼까요? 🚀
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- 입력 영역 -->
+        <div class="input-box">
+
+            <textarea
+                id="userInput"
+                placeholder="코딩 문제를 입력하거나 질문에 답하세요."
+            ></textarea>
+
+            <button id="submitBtn">
+                전송
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Mermaid -->
 <script type="module">
+
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
 window.mermaid = mermaid;
 
 mermaid.initialize({
     startOnLoad: false,
-    theme: "default"
+    theme: "default",
+    securityLevel: "loose"
 });
+
 </script>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-   *box-sizing:border-box;
-}
-
-body{
-  * font-family:'Segoe UI',sans-serif*
-    height:100vh;
-}
-
-.container{
-*   display:flex;
-    height:100vh;*}
-
-.left-panel{
-    width:50%;
-   *border-right:1px solid #ddd;
-    p*dding:20px;
-    overflow:auto;
-}
-
-*right-panel{
-    width:50%;
-    di*play:flex;
-    flex-direction:colu*n;
-}
-
-.problem-box{
-    padding:20*x;
-    border-bottom:1px solid #dd*;
-    background:#f8fafc;
-}
-
-.prob*em-box h2{
-    color:#2563eb;
-    *argin-bottom:10px;
-}
-
-.chat-box{
- *  flex:1;
-    padding:20px;
-    ov*rflow:auto;
-}
-
-.input-box{
-    bor*er-top:1px solid #ddd;
-    padding*15px;
-}
-
-textarea{
-    width:100%;*    min-height:100px;
-    padding:*0px;
-}
-
-button{
-    margin-top:10p*;
-    padding:10px 20px;
-    borde*:none;
-    background:#2563eb;
-   *color:white;
-    border-radius:6px*
-    cursor:pointer;
-}
-
-button:hov*r{
-    background:#1d4ed8;
-}
-
-#dia*ram{
-    display:flex;
-    justify*content:center;
-    align-items:fl*x-start;
-}
-</style>
-</head>
-
-<body*
-
-<div class="container">
-
-    <!-* 왼쪽 -->
-    <div class="left-panel*>
-
-        <h2>📈 순서도</h2>
-       *<br>
-
-        <div id="diagram"></*iv>
-
-    </div>
-
-    <!-- 오른쪽 -->
-*   <div class="right-panel">
-
-    *   <div class="problem-box">
-
-    *       <h2>📝 현재 문제</h2>
-
-        *   <p id="problemText">
-          *     아직 입력된 문제가 없습니다.
-            */p>
-
-        </div>
-
-        <div *lass="chat-box">
-
-            <div*id="chatMessage">
-
-               *안녕하세요! 😊<br><br>
-
-               *코딩 문제를 입력해보세요.
-
-            </div>*
-        </div>
-
-        <div clas*="input-box">
-
-            <textar*a
-                id="userInput"
- *              placeholder="문제를 입력하*나 질문에 답하세요">
-            </textare*>
-
-            <button onclick="ha*dleSubmit()">
-                전송
- *          </button>
-
-        </div*
-
-    </div>
-
-</div>
-
-<script>
-
-co*st state = {
-
-    started:false,
-
-*   step:0,
-
-    problem:"",
-
-    i*put:"",
-
-    output:"",
-
-    proce*s:"",
-
-    condition:""
-
-};
-
-funct*on generateMermaid(){
-
-    let cod* = `
-flowchart TD
-
-A([시작])
-`;
-
-   *if(state.input){
-
-        code += *
-B[/${state.input}/]
-A --> B
-`;
-  * }
-
-    if(state.process){
-
-      * code += `
-C[${state.process}]
-`;
-*        if(state.input)
-          * code += `B --> C\n`;
-    }
-
-    i*(state.output){
-
-        code += `*D[/${state.output}/]
-`;
-
-        i*(state.process)
-            code +* `C --> D\n`;
-
-        else if(sta*e.input)
-            code += `B --* D\n`;
-    }
-
-    if(state.conditi*n){
-
-        code += `
-E{${state.c*ndition}}
-`;
-
-        if(state.pro*ess)
-            code += `C --> E\*`;
-    }
-
-    code += `
-Z([종료])
-`;*
-    if(state.output)
-        code*+= `D --> Z`;
-
-    return code;
-}
-*async function renderMermaid(){
-
- *  const diagram = document.getElem*ntById("diagram");
-
-    const code*= generateMermaid();
-
-    const { *vg } =
-        await mermaid.rende*(
-            "graphDiv" + Date.no*(),
-            code
-        );
-
- *  diagram.innerHTML = svg;
-}
-
-func*ion askNextQuestion(){
-
-    const *hat =
-        document.getElementB*Id("chatMessage");
-
-    switch(sta*e.step){
-
-        case 1:
-
-       *    chat.innerHTML = `
-좋아요! 😊<br>*br>
-첫 번째 질문이에요.<br><br>
-이 문제에서 사용자* 입력해야 하는 값은 무엇일까요?
-`;
-
-           *break;
-
-        case 2:
-
-         *  chat.innerHTML = `
-좋아요! 🎉<br><b*>
-그럼 결과로 무엇을 출력해야 할까요?
-`;
-
-       *    break;
-
-        case 3:
-
-     *      chat.innerHTML = `
-좋은 생각이에요!*😊<br><br>
-입력한 값을 바로 출력하면 될까요?<br>*br>
-중간에 어떤 처리 과정이 필요할까요?
-`;
-
-     *      break;
-
-        case 4:
-
-   *        chat.innerHTML = `
-좋아요! 😊*br><br>
-판단하거나 비교해야 하는 조건이 있을까요?
-`;*
-            break;
-
-        case *:
-
-            chat.innerHTML = `
-*� 순서도가 완성되었어요!<br><br>
-이제 다음 단계에서는*각 도형을 코드로 변환해볼 수 있어요.
-`;
-
-        *   break;
-    }
-}
-
-async function *andleSubmit(){
-
-    const text =
- *      document.getElementById("use*Input").value.trim();
-
-    if(!tex*) return;
-
-    document.getElement*yId("userInput").value = "";
-
-    */ 문제 입력 단계
-    if(!state.started){*
-        state.problem = text;
-
-  *     state.started = true;
-
-      * state.step = 1;
-
-        document*getElementById("problemText")
-    *       .innerText = text;
-
-       *askNextQuestion();
-
-        render*ermaid();
-
-        return;
-    }
-
-*
+<!-- 상태관리 -->
+script.jsscript>
+
+</body>
+</html>
