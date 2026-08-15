@@ -6,228 +6,145 @@
 
 <title>Flow2Code Tutor</title>
 
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+window.mermaid = mermaid;
+
+mermaid.initialize({
+    startOnLoad: false,
+    theme: "default"
+});
+</script>
+
 <style>
 *{
     margin:0;
     padding:0;
-    box-sizing:border-box;
+   *box-sizing:border-box;
 }
 
 body{
-    font-family:'Segoe UI',sans-serif;
+  * font-family:'Segoe UI',sans-serif*
     height:100vh;
-    background:#f5f7fb;
 }
 
 .container{
-    display:flex;
-    height:100vh;
-}
+*   display:flex;
+    height:100vh;*}
 
 .left-panel{
     width:50%;
-    background:white;
-    border-right:1px solid #ddd;
-    padding:20px;
+   *border-right:1px solid #ddd;
+    p*dding:20px;
     overflow:auto;
 }
 
-.right-panel{
+*right-panel{
     width:50%;
-    display:flex;
-    flex-direction:column;
+    di*play:flex;
+    flex-direction:colu*n;
 }
 
-.problem-area{
-    background:white;
-    padding:20px;
-    border-bottom:1px solid #ddd;
+.problem-box{
+    padding:20*x;
+    border-bottom:1px solid #dd*;
+    background:#f8fafc;
 }
 
-.problem-area h2{
+.prob*em-box h2{
     color:#2563eb;
-    margin-bottom:10px;
+    *argin-bottom:10px;
 }
 
-.problem-text{
-    font-size:16px;
-    color:#333;
-}
-
-.chat-area{
-    flex:1;
-    overflow:auto;
+.chat-box{
+ *  flex:1;
     padding:20px;
-    background:#fafafa;
+    ov*rflow:auto;
 }
 
-.chat-message{
-    background:white;
-    padding:15px;
-    border-radius:12px;
-    box-shadow:0 2px 4px rgba(0,0,0,0.05);
-}
-
-.input-area{
-    background:white;
-    padding:15px;
-    border-top:1px solid #ddd;
+.input-box{
+    bor*er-top:1px solid #ddd;
+    padding*15px;
 }
 
 textarea{
-    width:100%;
-    min-height:100px;
-    padding:10px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    resize:none;
+    width:100%;*    min-height:100px;
+    padding:*0px;
 }
 
 button{
-    margin-top:10px;
+    margin-top:10p*;
     padding:10px 20px;
+    borde*:none;
     background:#2563eb;
-    color:white;
-    border:none;
-    border-radius:8px;
+   *color:white;
+    border-radius:6px*
     cursor:pointer;
 }
 
-button:hover{
+button:hov*r{
     background:#1d4ed8;
 }
 
-.flow-title{
-    margin-bottom:20px;
-}
-
-.flow-box{
+#dia*ram{
     display:flex;
-    flex-direction:column;
-    gap:15px;
-}
-
-.node{
-    padding:15px;
-    border-radius:10px;
-    text-align:center;
-    font-weight:bold;
-}
-
-.start{
-    background:#dcfce7;
-    color:#166534;
-}
-
-.input{
-    background:#dbeafe;
-    color:#1d4ed8;
-}
-
-.waiting{
-    background:#f3f4f6;
-    color:#6b7280;
-}
-
-.arrow{
-    text-align:center;
-    font-size:20px;
+    justify*content:center;
+    align-items:fl*x-start;
 }
 </style>
-
 </head>
-<body>
+
+<body*
 
 <div class="container">
 
-    <!-- 왼쪽 순서도 -->
+    <!-* 왼쪽 -->
+    <div class="left-panel*>
 
-    <div class="left-panel">
+        <h2>📈 순서도</h2>
+       *<br>
 
-        <h2 class="flow-title">📈 순서도</h2>
-
-        <div class="flow-box">
-
-            <div class="node start">
-                시작
-            </div>
-
-            <div class="arrow">⬇️</div>
-
-            <div class="node input">
-                문제 입력 대기
-            </div>
-
-            <div class="arrow">⬇️</div>
-
-            <div class="node waiting">
-                입력 찾는 중...
-            </div>
-
-            <div class="arrow">⬇️</div>
-
-            <div class="node waiting">
-                출력 찾는 중...
-            </div>
-
-            <div class="arrow">⬇️</div>
-
-            <div class="node waiting">
-                처리 과정 찾는 중...
-            </div>
-
-        </div>
+        <div id="diagram"></*iv>
 
     </div>
 
-    <!-- 오른쪽 패널 -->
+    <!-- 오른쪽 -->
+*   <div class="right-panel">
 
-    <div class="right-panel">
+    *   <div class="problem-box">
 
-        <!-- 문제 영역 -->
+    *       <h2>📝 현재 문제</h2>
 
-        <div class="problem-area">
-
-            <h2>📝 코딩 문제</h2>
-
-            <p class="problem-text" id="problemDisplay">
-                아직 입력된 문제가 없습니다.
-            </p>
+        *   <p id="problemText">
+          *     아직 입력된 문제가 없습니다.
+            */p>
 
         </div>
 
-        <!-- 채팅 영역 -->
+        <div *lass="chat-box">
 
-        <div class="chat-area">
+            <div*id="chatMessage">
 
-            <div class="chat-message" id="chatMessage">
+               *안녕하세요! 😊<br><br>
 
-                안녕하세요! 😊<br><br>
+               *코딩 문제를 입력해보세요.
 
-                저는 Flow2Code Tutor예요.<br><br>
-
-                먼저 코딩 문제를 입력해 주세요.<br>
-
-                문제를 입력하면 함께 입력, 출력, 처리 과정을 찾아볼게요! 🚀
-
-            </div>
-
+            </div>*
         </div>
 
-        <!-- 입력 -->
+        <div clas*="input-box">
 
-        <div class="input-area">
+            <textar*a
+                id="userInput"
+ *              placeholder="문제를 입력하*나 질문에 답하세요">
+            </textare*>
 
-            <textarea
-                id="problemInput"
-                placeholder="예) 정수 하나를 입력받아 짝수인지 홀수인지 출력하시오.">
-            </textarea>
+            <button onclick="ha*dleSubmit()">
+                전송
+ *          </button>
 
-            <button onclick="startAnalysis()">
-                분석 시작
-            </button>
-
-        </div>
+        </div*
 
     </div>
 
@@ -235,37 +152,174 @@ button:hover{
 
 <script>
 
-function startAnalysis(){
+co*st state = {
 
-    const problem =
-        document.getElementById("problemInput").value;
+    started:false,
 
-    if(problem.trim() === ""){
+*   step:0,
 
-        alert("문제를 입력해주세요!");
+    problem:"",
+
+    i*put:"",
+
+    output:"",
+
+    proce*s:"",
+
+    condition:""
+
+};
+
+funct*on generateMermaid(){
+
+    let cod* = `
+flowchart TD
+
+A([시작])
+`;
+
+   *if(state.input){
+
+        code += *
+B[/${state.input}/]
+A --> B
+`;
+  * }
+
+    if(state.process){
+
+      * code += `
+C[${state.process}]
+`;
+*        if(state.input)
+          * code += `B --> C\n`;
+    }
+
+    i*(state.output){
+
+        code += `*D[/${state.output}/]
+`;
+
+        i*(state.process)
+            code +* `C --> D\n`;
+
+        else if(sta*e.input)
+            code += `B --* D\n`;
+    }
+
+    if(state.conditi*n){
+
+        code += `
+E{${state.c*ndition}}
+`;
+
+        if(state.pro*ess)
+            code += `C --> E\*`;
+    }
+
+    code += `
+Z([종료])
+`;*
+    if(state.output)
+        code*+= `D --> Z`;
+
+    return code;
+}
+*async function renderMermaid(){
+
+ *  const diagram = document.getElem*ntById("diagram");
+
+    const code*= generateMermaid();
+
+    const { *vg } =
+        await mermaid.rende*(
+            "graphDiv" + Date.no*(),
+            code
+        );
+
+ *  diagram.innerHTML = svg;
+}
+
+func*ion askNextQuestion(){
+
+    const *hat =
+        document.getElementB*Id("chatMessage");
+
+    switch(sta*e.step){
+
+        case 1:
+
+       *    chat.innerHTML = `
+좋아요! 😊<br>*br>
+첫 번째 질문이에요.<br><br>
+이 문제에서 사용자* 입력해야 하는 값은 무엇일까요?
+`;
+
+           *break;
+
+        case 2:
+
+         *  chat.innerHTML = `
+좋아요! 🎉<br><b*>
+그럼 결과로 무엇을 출력해야 할까요?
+`;
+
+       *    break;
+
+        case 3:
+
+     *      chat.innerHTML = `
+좋은 생각이에요!*😊<br><br>
+입력한 값을 바로 출력하면 될까요?<br>*br>
+중간에 어떤 처리 과정이 필요할까요?
+`;
+
+     *      break;
+
+        case 4:
+
+   *        chat.innerHTML = `
+좋아요! 😊*br><br>
+판단하거나 비교해야 하는 조건이 있을까요?
+`;*
+            break;
+
+        case *:
+
+            chat.innerHTML = `
+*� 순서도가 완성되었어요!<br><br>
+이제 다음 단계에서는*각 도형을 코드로 변환해볼 수 있어요.
+`;
+
+        *   break;
+    }
+}
+
+async function *andleSubmit(){
+
+    const text =
+ *      document.getElementById("use*Input").value.trim();
+
+    if(!tex*) return;
+
+    document.getElement*yId("userInput").value = "";
+
+    */ 문제 입력 단계
+    if(!state.started){*
+        state.problem = text;
+
+  *     state.started = true;
+
+      * state.step = 1;
+
+        document*getElementById("problemText")
+    *       .innerText = text;
+
+       *askNextQuestion();
+
+        render*ermaid();
 
         return;
     }
 
-    document.getElementById("problemDisplay").innerText =
-        problem;
-
-    document.getElementById("chatMessage").innerHTML = `
-
-        좋아요! 😊<br><br>
-
-        문제를 확인했어요.<br><br>
-
-        <b>${problem}</b><br><br>
-
-        첫 번째 질문입니다!<br><br>
-
-        이 문제에서 사용자가 입력해야 하는 값은 무엇일까요?
-
-    `;
-}
-
-</script>
-
-</body>
-</html>
+*
