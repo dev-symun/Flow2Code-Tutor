@@ -1,61 +1,176 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flow2Code Tutor</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<title>Flow2Code Tutor</title>
 
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            font-family: "Segoe UI", sans-serif;
-        }
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
-        .header {
-            height: 60px;
-            background: #2563eb;
-            color: white;
-            display: flex;
-            align-items: center;
-            padding: 0 24px;
-            font-size: 20px;
-            font-weight: 600;
-        }
+mermaid.initialize({
+    startOnLoad: true
+});
+</script>
 
-        .container {
-            height: calc(100vh - 60px);
-            width: 100%;
-        }
+<style>
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-    </style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    height:100vh;
+    background:#f4f6f9;
+}
+
+.container{
+    display:flex;
+    height:100vh;
+}
+
+.left-panel{
+    width:50%;
+    background:white;
+    border-right:1px solid #ddd;
+    padding:20px;
+    overflow:auto;
+}
+
+.right-panel{
+    width:50%;
+    display:flex;
+    flex-direction:column;
+}
+
+.problem-box{
+    background:white;
+    padding:20px;
+    border-bottom:1px solid #ddd;
+}
+
+.problem-box h2{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.chat-box{
+    flex:1;
+    background:#fafafa;
+    padding:20px;
+    overflow:auto;
+}
+
+.input-area{
+    background:white;
+    padding:15px;
+    border-top:1px solid #ddd;
+}
+
+textarea{
+    width:100%;
+    min-height:80px;
+    padding:10px;
+    resize:none;
+}
+
+button{
+    margin-top:10px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.flow-title{
+    margin-bottom:20px;
+    color:#111827;
+}
+
+.mermaid{
+    background:white;
+}
+
+</style>
+
 </head>
 <body>
 
-    <div class="header">
-        Flow2Code Tutor
+<div class="container">
+
+    <div class="left-panel">
+
+        <h2 class="flow-title">
+            📈 순서도
+        </h2>
+
+        <div class="mermaid">
+
+flowchart TD
+
+A([시작])
+
+B[/입력 찾는 중...]
+
+A --> B
+
+        </div>
+
     </div>
 
-    <div class="container">
-        <iframe
-            src="https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_flow2codetutor_FrP_CX/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
-            allow="microphone"
-            loading="lazy">
-        </iframe>
+    <div class="right-panel">
+
+        <div class="problem-box">
+
+            <h2>📝 문제</h2>
+
+            <p>
+                정수 하나를 입력받아 짝수인지 홀수인지 출력하시오.
+            </p>
+
+        </div>
+
+        <div class="chat-box">
+
+            <h3>🤖 Flow2Code Tutor</h3>
+
+            <br>
+
+            <p>
+                안녕하세요! 😊
+            </p>
+
+            <br>
+
+            <p>
+                먼저 이 문제에서 입력은 무엇일까요?
+            </p>
+
+        </div>
+
+        <div class="input-area">
+
+            <textarea placeholder="답변을 입력해보세요..."></textarea>
+
+            <button>
+                전송
+            </button>
+
+        </div>
+
     </div>
+
+</div>
 
 </body>
 </html>
